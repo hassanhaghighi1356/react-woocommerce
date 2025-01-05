@@ -24,7 +24,7 @@ const Header = () => {
             <ul className={styles.mainNav}>
               <li>
                 <Link href="/">
-                  <a>Shop</a>
+                  Shop
                 </Link>
               </li>
               <li>

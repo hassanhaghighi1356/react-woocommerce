@@ -1,3 +1,9 @@
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/pagination";
+import { Pagination } from "swiper/modules";
+// import axios from "axios";
+
 import React, { useContext } from "react";
 import Image from "next/image";
 import { GetStaticProps, GetStaticPaths } from "next";
@@ -9,22 +15,27 @@ import CartVisibilityContext from "contexts/cartVisibilityContext";
 import Types from "reducers/cart/types";
 import classNames from "classnames";
 import MetaHead from "components/MetaHead";
+import BreadCrubms from "components/SingleProduct/breadcrumbs";
+import Meta from "components/SingleProduct/meta";
+import ProductGallery from "components/SingleProduct/product-gallery";
+import  Title  from "components/SingleProduct/title";
+import Variable from "components/SingleProduct/Variable";
+import Seller from "components/SingleProduct/Seller";
+import Tabs from "components/SingleProduct/Tabs";
 
-interface ProductProps {
-  product: ProductInterface;
-}
-
-const Product: React.FC<ProductProps> = ({ product }) => {
+const Product = ({ product }) => {
   const { dispatch } = useContext(CartItemsContext);
   const { toggleCartVisibility } = useContext(CartVisibilityContext);
 
   const addToCart = () => {
     dispatch({
       type: Types.addToCart,
-      payload: { ...product }
+      payload: { ...product },
     });
     toggleCartVisibility();
   };
+
+  console.log(product);
 
   return (
     <>
@@ -38,10 +49,41 @@ const Product: React.FC<ProductProps> = ({ product }) => {
           }
         />
       )}
+
       <div className="flex sm:flex-row flex-col justify-between w-full max-w-2xl mx-auto">
+        <div className="flex justify-between flex-col bg-slate-100 w-48">
+          <BreadCrubms />
+          {product?.image && <ProductGallery mainImage={product?.image} galleryImages={product?.galleryImages} />}
+          <Meta />
+          <Title />
+          <Variable />
+          <Seller />
+          <Tabs />
+        </div>
         <div className="overflow-hidden relative sm:w-2/5 w-full sm:mb-0 mb-5 h-80">
           {product?.image && (
+            <Swiper
+              pagination={{
+                dynamicBullets: true,
+              }}
+              modules={[Pagination]}
+              className="mySwiper"
+            >
+              <SwiperSlide>
+                <img src={product?.image?.sourceUrl} alt="pic" />
+              </SwiperSlide>
+              {product?.galleryImages?.nodes &&
+                product?.galleryImages?.nodes.map((image) => (
+                  <SwiperSlide>
+                    <img src={image.sourceUrl} alt="pic" />
+                  </SwiperSlide>
+                ))}
+            </Swiper>
+          )}
+
+          {product?.image && (
             <Image
+              alt="picture1"
               src={product?.image?.sourceUrl}
               layout="fill"
               quality={100}
@@ -58,7 +100,7 @@ const Product: React.FC<ProductProps> = ({ product }) => {
             <span
               className={classNames("text-2xl mb-1", {
                 "line-through text-gray-400 mr-3": product?.onSale,
-                "text-gray-900": !product?.onSale
+                "text-gray-900": !product?.onSale,
               })}
             >
               {product?.regularPrice ?? product?.price}
@@ -89,30 +131,30 @@ const Product: React.FC<ProductProps> = ({ product }) => {
   );
 };
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
+export const getStaticProps = async ({ params }) => {
   const { data } = await apolloClient.query({
     query: GET_PRODUCT,
-    variables: { slug: params?.slug }
+    variables: { slug: params?.slug },
   });
 
   return {
     props: { product: data?.product, slug: params?.slug },
-    revalidate: 100
+    revalidate: 100,
   };
 };
 
-export const getStaticPaths: GetStaticPaths = async () => {
+export const getStaticPaths = async () => {
   const { data } = await apolloClient.query({
-    query: GET_ALL_PRODUCTS_SLUGS
+    query: GET_ALL_PRODUCTS_SLUGS,
   });
 
-  const paths = data?.products?.nodes?.map((product: { slug: string }) => ({
-    params: { slug: product.slug }
+  const paths = data?.products?.nodes?.map((product) => ({
+    params: { slug: product.slug },
   }));
 
   return {
     paths,
-    fallback: true
+    fallback: true,
   };
 };
 

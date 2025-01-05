@@ -2,6 +2,6 @@
 module.exports = {
   reactStrictMode: true,
   images: {
-    domains: ["react-ecommerce.local", "react-ecommerce-v2.lougiequisel.com"]
+    domains: ["react-ecommerce.local", "zanbil.avin-tarh.ir"]
   }
 };

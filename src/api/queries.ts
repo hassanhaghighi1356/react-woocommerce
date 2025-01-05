@@ -103,32 +103,87 @@ export const GET_CATEGORY_PRODUCTS = gql`
 export const GET_PRODUCT = gql`
   query GetProduct($slug: ID!) {
     product(id: $slug, idType: SLUG) {
-      name
+      id
+      databaseId
       slug
-      onSale
+      name
+      type
       description
+      shortDescription(format: RAW)
       image {
-        altText
+        id
         sourceUrl
-        mediaDetails {
-          height
-          width
+        altText
+      }
+      galleryImages {
+        nodes {
+          id
+          sourceUrl
+          altText
+        }
+      }
+      productTags(first: 20) {
+        nodes {
+          id
+          slug
+          name
+        }
+      }
+      attributes {
+        nodes {
+          id
+          attributeId
+          ... on LocalProductAttribute {
+            name
+            options
+            variation
+          }
+          ... on GlobalProductAttribute {
+            name
+            options
+            variation
+          }
         }
       }
       ... on SimpleProduct {
+        onSale
+        stockStatus
         price
-        salePrice
+        rawPrice: price(format: RAW)
         regularPrice
+        salePrice
+        stockStatus
+        stockQuantity
+        soldIndividually
       }
       ... on VariableProduct {
+        onSale
         price
-        salePrice
+        rawPrice: price(format: RAW)
         regularPrice
-      }
-      ... on ExternalProduct {
-        price
         salePrice
-        regularPrice
+        stockStatus
+        stockQuantity
+        soldIndividually
+        variations(first: 50) {
+          nodes {
+            id
+            databaseId
+            name
+            price
+            rawPrice: price(format: RAW)
+            regularPrice
+            salePrice
+            onSale
+            attributes {
+              nodes {
+                name
+                label
+                value
+              }
+            }
+          }
+        }
       }
     }
   }
@@ -174,6 +229,44 @@ export const GET_PRODUCTS_BY_SLUGS = gql`
           price
           salePrice
           regularPrice
+        }
+      }
+    }
+  }
+`;
+
+export const GET_LATEST_PRODUCTS = gql`
+  query GetLatestProducts($first: Int = 10) {
+    products(where: { orderby: { field: DATE, order: DESC } }, first: $first) {
+      nodes {
+        name
+        slug
+        onSale
+        image {
+          altText
+          sourceUrl
+          mediaDetails {
+            height
+            width
+          }
+        }
+        ... on SimpleProduct {
+          price
+          salePrice
+          regularPrice
+          date
+        }
+        ... on VariableProduct {
+          price
+          salePrice
+          regularPrice
+          date
+        }
+        ... on ExternalProduct {
+          price
+          salePrice
+          regularPrice
+          date
         }
       }
     }

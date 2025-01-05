@@ -11,8 +11,7 @@ interface ProductItemProps {
 const ProductItem: React.FC<ProductItemProps> = ({ product }) => {
   return (
     <div className={styles.productItem}>
-      <Link href={`/product/${product.slug}`}>
-        <a className="relative w-full h-full">
+      <Link className="relative w-full h-full" href={`/product/${product.slug}`}>
           <div className="w-full h-64 md:mb-4 mb-2 overflow-hidden relative">
             <Image
               src={product?.image.sourceUrl}
@@ -21,10 +20,8 @@ const ProductItem: React.FC<ProductItemProps> = ({ product }) => {
               className="clickable-img"
             />
           </div>
-        </a>
       </Link>
-      <Link href={`/product/${product.slug}`}>
-        <a className="relative w-full h-full">
+      <Link className="relative w-full h-full" href={`/product/${product.slug}`}>
           <div className="w-full px-1 flex flex-col items-center">
             <h3 className="text-lg uppercase font-medium text-center mb-3">
               {product.name}
@@ -45,7 +42,6 @@ const ProductItem: React.FC<ProductItemProps> = ({ product }) => {
               )}
             </div>
           </div>
-        </a>
       </Link>
     </div>
   );

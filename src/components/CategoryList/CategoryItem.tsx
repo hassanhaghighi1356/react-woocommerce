@@ -11,8 +11,7 @@ const CategoryItem: React.FC<CategoryItemProps> = ({ category }) => {
   const { image, slug, name, description } = category;
   return (
     <div className={styles.categoryItem}>
-      <Link href={`/category/${slug}`}>
-        <a className="relative w-full h-full">
+      <Link className="relative w-full h-full" href={`/category/${slug}`}>
           <Image
             src={image.sourceUrl}
             alt={image.altText}
@@ -24,7 +23,6 @@ const CategoryItem: React.FC<CategoryItemProps> = ({ category }) => {
             <span className="font-semibold capitalize">{name}</span>
             {description && <span className="text-xs">{description}</span>}
           </div>
-        </a>
       </Link>
     </div>
   );
