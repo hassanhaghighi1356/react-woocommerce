@@ -60,7 +60,7 @@ const Product = ({ product }) => {
           <Seller />
           <Tabs />
           <Tabs2 />
-          <Lable />
+          {/* <Lable /> */}
           
           {product?.image && (
             <Vid

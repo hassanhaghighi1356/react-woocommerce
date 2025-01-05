@@ -370,7 +370,7 @@
     "@react-types/breadcrumbs" "3.7.9"
     "@react-types/shared" "3.26.0"
 
-"@nextui-org/button@2.2.8":
+"@nextui-org/button@^2.2.8", "@nextui-org/button@2.2.8":
   version "2.2.8"
   resolved "https://registry.npmjs.org/@nextui-org/button/-/button-2.2.8.tgz"
   integrity sha512-Km9ER+jpA3DdYmbh8k30w2DMXZIPtZjs7QVVaPAEW+rJYnGWNsomcltlOLIvHpBYeAbB8hfJCbRJ35r9WeL9Gw==
@@ -990,7 +990,7 @@
     "@react-types/shared" "3.26.0"
     clsx "^1.2.1"
 
-"@nextui-org/system@>=2.4.0", "@nextui-org/system@2.4.5":
+"@nextui-org/system@^2.4.5", "@nextui-org/system@>=2.4.0", "@nextui-org/system@2.4.5":
   version "2.4.5"
   resolved "https://registry.npmjs.org/@nextui-org/system/-/system-2.4.5.tgz"
   integrity sha512-PNJta8tNAsWy0Sf39HCjwd73gSpZ/vhDGL9uZA+sT6kXL5ZKxCv8dLd1MNtt5Tg+v8fR4rVWHwmPuQX9rjK1MA==
@@ -1044,7 +1044,7 @@
     "@react-types/tabs" "3.3.11"
     scroll-into-view-if-needed "3.0.10"
 
-"@nextui-org/theme@>=2.4.0", "@nextui-org/theme@>=2.4.3", "@nextui-org/theme@2.4.4":
+"@nextui-org/theme@^2.4.4", "@nextui-org/theme@>=2.4.0", "@nextui-org/theme@>=2.4.3", "@nextui-org/theme@2.4.4":
   version "2.4.4"
   resolved "https://registry.npmjs.org/@nextui-org/theme/-/theme-2.4.4.tgz"
   integrity sha512-L4MtnYa77RezHxvzQ5k5Z/+7ANg73MEFJqMMeUORUteWFv85Ugxlo/SYAL2BZIGmO5ioZt8A6NuhqT+qDDds8w==

@@ -29,10 +29,7 @@ const Vid = ({ mainImage, galleryImages }) => {
       </Swiper>
       </div>
       <div className="text-right text-xl">راهنمای خرید گوشی خوش دست</div>
-      <div className="flex justify-end ">
-        <div className="pl-6 text-sm text-gray-400">تهران</div>
-        <div className="pl-6">آریاسنتر</div>
-        <div className="pl-6">
+      
           <svg
             width="32"
             height="32"
@@ -64,10 +61,13 @@ const Vid = ({ mainImage, galleryImages }) => {
               strokeLinecap="round"
             />
           </svg>
+        <div className="pl-6">آریاسنتر</div>
+        <div className="pl-6 text-sm text-gray-400">تهران</div>
+        <div className="pl-6">
         </div>
       </div>
       </div>
-      </div>
+      
     </>
   );
 };

@@ -10,7 +10,10 @@
   },
   "dependencies": {
     "@apollo/client": "^3.11.10",
+    "@nextui-org/button": "^2.2.8",
     "@nextui-org/react": "^2.6.10",
+    "@nextui-org/system": "^2.4.5",
+    "@nextui-org/theme": "^2.4.4",
     "classnames": "^2.5.1",
     "framer-motion": "^11.15.0",
     "graphql": "^16.9.0",
