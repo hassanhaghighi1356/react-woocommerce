@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import styles from "styles/components/PageLayout/Cart/Item.module.scss";
+// import styles from "styles/components/PageLayout/Cart/Item.module.scss";
 import { CartProduct } from "interfaces";
 import Image from "next/image";
 import CartItemsContext from "contexts/cartItemsContext";

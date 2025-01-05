@@ -4,16 +4,10 @@ import {
   GET_CATEGORY_PRODUCTS,
   GET_PRODUCT_CATEGORIES_SLUGS
 } from "api/queries";
-import { Product } from "interfaces";
 import ProductList from "components/ProductList/ProductList";
 import MetaHead from "components/MetaHead";
 
-interface CategoryProps {
-  products: Product[];
-  slug: string;
-}
-
-const Category: React.FC<CategoryProps> = ({ products, slug }) => {
+const Category = ({ products, slug }) => {
   return (
     <>
       {slug && (
@@ -34,7 +28,7 @@ const Category: React.FC<CategoryProps> = ({ products, slug }) => {
   );
 };
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
+export const getStaticProps = async ({ params }) => {
   const { data } = await apolloClient.query({
     query: GET_CATEGORY_PRODUCTS,
     variables: { category: params?.slug }
@@ -46,13 +40,13 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   };
 };
 
-export const getStaticPaths: GetStaticPaths = async () => {
+export const getStaticPaths = async () => {
   const { data } = await apolloClient.query({
     query: GET_PRODUCT_CATEGORIES_SLUGS
   });
 
   const paths = data?.productCategories?.nodes?.map(
-    (category: { slug: string }) => ({
+    (category) => ({
       params: { slug: category.slug }
     })
   );

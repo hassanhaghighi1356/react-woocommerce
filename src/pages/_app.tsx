@@ -1,5 +1,6 @@
 import "../styles/globals.scss";
 import { useEffect, useReducer, useState } from "react";
+import {NextUIProvider} from "@nextui-org/react";
 import apolloClient from "lib/apolloClient";
 import type { AppProps } from "next/app";
 import PageLayout from "components/PageLayout/PageLayout";
@@ -60,23 +61,25 @@ function MyApp({ Component, pageProps }: AppProps) {
   }, []);
 
   return (
-    <CartItemsContext.Provider
-      value={{
-        cart,
-        dispatch
-      }}
-    >
-      <CartVisibilityContext.Provider
+    <NextUIProvider>
+      <CartItemsContext.Provider
         value={{
-          cartVisibility,
-          toggleCartVisibility
+          cart,
+          dispatch
         }}
       >
-        <PageLayout>
-          <Component {...pageProps} />
-        </PageLayout>
-      </CartVisibilityContext.Provider>
-    </CartItemsContext.Provider>
+        <CartVisibilityContext.Provider
+          value={{
+            cartVisibility,
+            toggleCartVisibility
+          }}
+        >
+          <PageLayout>
+            <Component {...pageProps} />
+          </PageLayout>
+        </CartVisibilityContext.Provider>
+      </CartItemsContext.Provider>
+    </NextUIProvider>
   );
 }
 

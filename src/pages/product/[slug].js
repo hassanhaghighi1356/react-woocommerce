@@ -15,13 +15,9 @@ import CartVisibilityContext from "contexts/cartVisibilityContext";
 import Types from "reducers/cart/types";
 import classNames from "classnames";
 import MetaHead from "components/MetaHead";
-import BreadCrubms from "components/SingleProduct/breadcrumbs";
-import Meta from "components/SingleProduct/meta";
-import ProductGallery from "components/SingleProduct/product-gallery";
-import  Title  from "components/SingleProduct/title";
-import Variable from "components/SingleProduct/Variable";
-import Seller from "components/SingleProduct/Seller";
-import Tabs from "components/SingleProduct/Tabs";
+import BreadCrubms from "components/BreadCrumbs";
+
+import { Meta, ProductGallery, Title, Variable, Seller, Tabs, Tabs2, Lable, Vid, Views } from  "components/SingleProduct";
 
 const Product = ({ product }) => {
   const { dispatch } = useContext(CartItemsContext);
@@ -35,7 +31,7 @@ const Product = ({ product }) => {
     toggleCartVisibility();
   };
 
-  console.log(product);
+  // console.log(product.productCategories.nodes);
 
   return (
     <>
@@ -50,47 +46,31 @@ const Product = ({ product }) => {
         />
       )}
 
-      <div className="flex sm:flex-row flex-col justify-between w-full max-w-2xl mx-auto">
-        <div className="flex justify-between flex-col bg-slate-100 w-48">
           <BreadCrubms />
-          {product?.image && <ProductGallery mainImage={product?.image} galleryImages={product?.galleryImages} />}
-          <Meta />
-          <Title />
+          {product?.image && (
+            <ProductGallery
+              mainImage={product?.image}
+              galleryImages={product?.galleryImages}
+            />
+          )}
+
+          <Meta Categories={product?.productCategories?.nodes} Brand="نوکیا" />
+          <Title title={product?.name} />
           <Variable />
           <Seller />
           <Tabs />
-        </div>
-        <div className="overflow-hidden relative sm:w-2/5 w-full sm:mb-0 mb-5 h-80">
+          <Tabs2 />
+          <Lable />
+          
           {product?.image && (
-            <Swiper
-              pagination={{
-                dynamicBullets: true,
-              }}
-              modules={[Pagination]}
-              className="mySwiper"
-            >
-              <SwiperSlide>
-                <img src={product?.image?.sourceUrl} alt="pic" />
-              </SwiperSlide>
-              {product?.galleryImages?.nodes &&
-                product?.galleryImages?.nodes.map((image) => (
-                  <SwiperSlide>
-                    <img src={image.sourceUrl} alt="pic" />
-                  </SwiperSlide>
-                ))}
-            </Swiper>
-          )}
-
-          {product?.image && (
-            <Image
-              alt="picture1"
-              src={product?.image?.sourceUrl}
-              layout="fill"
-              quality={100}
-              className="object-cover"
+            <Vid
+              mainImage={product?.image}
+              galleryImages={product?.galleryImages}
             />
           )}
-        </div>
+
+          <Views />
+
         <div className="sm:w-3/5 w-full sm:pl-6 sm:pr-0 pl-5 pr-5 ">
           <h1 className="text-4xl text-left font-bold text-gray-900 sm:truncate mb-8">
             {product?.name}
@@ -126,7 +106,6 @@ const Product = ({ product }) => {
             Add To Cart
           </button>
         </div>
-      </div>
     </>
   );
 };

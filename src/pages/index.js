@@ -2,7 +2,6 @@ import apolloClient from "lib/apolloClient";
 import ProductList from "components/ProductList/ProductList";
 import MetaHead from "components/MetaHead";
 import { GET_LATEST_PRODUCTS } from "api/queries";
-//import Menu from "pages/mainMenu"
 
 const Home = ({ Products }) => {
   return (

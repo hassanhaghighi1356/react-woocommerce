@@ -129,6 +129,13 @@ export const GET_PRODUCT = gql`
           name
         }
       }
+      productCategories(first: 20) { # Fetch product categories
+        nodes {
+          id
+          name
+          slug
+        }
+      }
       attributes {
         nodes {
           id
@@ -186,8 +193,7 @@ export const GET_PRODUCT = gql`
         }
       }
     }
-  }
-`;
+  }`;
 
 export const GET_ALL_PRODUCTS_SLUGS = gql`
   query GetAllProductsSlugs {
@@ -272,3 +278,6 @@ export const GET_LATEST_PRODUCTS = gql`
     }
   }
 `;
+
+
+

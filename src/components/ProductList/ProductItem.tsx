@@ -16,8 +16,9 @@ const ProductItem: React.FC<ProductItemProps> = ({ product }) => {
             <Image
               src={product?.image.sourceUrl}
               quality={100}
-              layout="fill"
               className="clickable-img"
+              width={300}
+              height={300}
             />
           </div>
       </Link>
