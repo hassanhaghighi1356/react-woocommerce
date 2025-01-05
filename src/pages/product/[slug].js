@@ -1,9 +1,3 @@
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
-import "swiper/css/pagination";
-import { Pagination } from "swiper/modules";
-// import axios from "axios";
-
 import React, { useContext } from "react";
 import Image from "next/image";
 import { GetStaticProps, GetStaticPaths } from "next";
@@ -17,7 +11,7 @@ import classNames from "classnames";
 import MetaHead from "components/MetaHead";
 import BreadCrubms from "components/BreadCrumbs";
 
-import { Meta, ProductGallery, Title, Variable, Seller, Tabs, Tabs2, Lable, Vid, Views } from  "components/SingleProduct";
+import { Meta, ProductGallery, Title, Variation, Seller, Tabs, Tabs2, Lable, Vid, Views } from  "components/SingleProduct";
 
 const Product = ({ product }) => {
   const { dispatch } = useContext(CartItemsContext);
@@ -56,10 +50,15 @@ const Product = ({ product }) => {
 
           <Meta Categories={product?.productCategories?.nodes} Brand="نوکیا" />
           <Title title={product?.name} />
-          <Variable />
+
+
+
+          {product?.variations?.nodes && <Variation variations={product.variations.nodes} />}
+
+
           <Seller />
-          <Tabs />
-          <Tabs2 />
+          
+          
           <Lable />
           
           {product?.image && (
